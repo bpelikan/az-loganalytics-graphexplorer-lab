@@ -17,19 +17,19 @@ az group create --name $LOGSTEST02_RG --location $LOCATION --subscription $SUB_0
 az monitor log-analytics workspace create --resource-group $DIAGNOSTIC_RG --workspace-name "diagnosticlogs-la" --location $LOCATION --subscription $SUB_02
 ```
 
-## 2. Wysyłanie logów z Activity log do Log Analytics
+### 2. Wysyłanie logów z Activity log do Log Analytics
 Dokumentacja:
 * [Send to Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log#send-to-log-analytics-workspace)
 
-### 2.1 Przechodzimy do `Activity log` -> `Export Activity Logs`
+#### 2.1 Przechodzimy do `Activity log` -> `Export Activity Logs`
 ![Screen](./img/20220413142425.jpg "Screen")
 
 
-### 2.2 Wybieramy subskrypcję i przechodzimy do `Add diagnostic setting`
+#### 2.2 Wybieramy subskrypcję i przechodzimy do `Add diagnostic setting`
 ![Screen](./img/20220413142731.jpg "Screen")
 
 
-### 2.3 
+#### 2.3 
 ![Screen](./img/20220413143130.jpg "Screen")
 
 
