@@ -22,7 +22,7 @@ Dokumentacja:
 * [Send to Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log#send-to-log-analytics-workspace)
 
 #### 2.1 Przechodzimy do `Activity log` -> `Export Activity Logs`
-![Screen](./img/20220413142425.jpg "Screen")
+![Screen](./img/20220413220528.jpg "Screen")
 
 
 #### 2.2 Wybieramy subskrypcję i przechodzimy do `Add diagnostic setting`
@@ -111,7 +111,7 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 `Resource Graph` nie posiada informacji o autorze zmian, informacje te natomiast można pobrać z `Activity log`, które exportujemy do `Log Analytics` w celu łatwiejszego odpytywania.
 
 
-#### 5.1 Przechodzimy do zasobu `diagnosticlogs-la` i w sekcji `General` Wybieramy `Logs`
+#### 5.1 Przechodzimy do zasobu `lab-diagnosticlogs-la` i w sekcji `General` Wybieramy `Logs`
 ![Screen](./img/20220413152820.jpg "Screen")
 
 
