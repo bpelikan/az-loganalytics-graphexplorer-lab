@@ -73,7 +73,8 @@ az network public-ip update \
 ### 4. Wykorzystanie `Resource Graph`
 
 Dokumentacja:
-* 
+* [What is Azure Resource Graph?](https://docs.microsoft.com/en-us/azure/governance/resource-graph/overview)
+* [Quickstart: Run your first Resource Graph query using REST API](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-rest-api)
 
 #### 4.1 Przechodzimy do usługi `Resource Graph Explorer`
 ![Screen](./img/20220413144945.jpg "Screen")
@@ -103,6 +104,9 @@ Dokumentacja:
   | limit 10
   ```
   ![Screen](./img/20220413151342.jpg "Screen")
+
+
+### 5. Wykorzystanie `Log Analytics`
 
 
 <!-- 
