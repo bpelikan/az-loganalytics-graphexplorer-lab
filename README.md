@@ -80,17 +80,18 @@ Dokumentacja:
 ![Screen](./img/20220413144945.jpg "Screen")
 
 #### 4.2 Sprawdzamy czy ustawiony jest poprawny scope
+Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostępnych subskrypcji
 ![Screen](./img/20220413145621.jpg "Screen")
 
 #### 4.3 Przykładowe zapytania o zasoby
-* Lista zasobow `Public IP address`, które mają dostępny adres publiczny
+* Lista zasobów `Public IP address`, które mają dostępny adres publiczny:
   ```kql
   Resources
   | where type contains 'publicIPAddresses' and isnotempty(properties.ipAddress)
   | project name,id= split(properties.ipConfiguration.id,"providers",1),ip_address=properties.ipAddress
   ```
   ![Screen](./img/20220413150111.jpg "Screen")
-* Lista ostatnich 10 zmian adresów IP na zasobie `Public IP address`
+* Lista ostatnich 10 zmian adresów IP na zasobie `Public IP address`:
   ```kql
   resourcechanges
   | where properties.targetResourceId contains 'publicIPAddresses' and 
@@ -107,6 +108,20 @@ Dokumentacja:
 
 
 ### 5. Wykorzystanie `Log Analytics`
+`Resource Graph` nie posiada informacji o autorze zmian, informacje te natomiast można pobrać z `Activity log`, które exportujemy do `Log Analytics` w celu łatwiejszego odpytywania.
+
+#### 5.1 Przechodzimy do zasobu `diagnosticlogs-la` i z sekcji `General` Wybieramy `Logs`
+![Screen](./img/20220413152820.jpg "Screen")
+
+#### 5.2 Przykładowe zapytanie
+* Lista ostanich zmian:
+  ```kql
+  AzureActivity
+  | order by TimeGenerated desc 
+  ```
+  ![Screen](./img/20220413153252.jpg "Screen")
+
+
 
 
 <!-- 
