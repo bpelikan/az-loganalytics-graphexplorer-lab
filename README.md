@@ -81,6 +81,7 @@ Dokumentacja:
 
 #### 4.2 Sprawdzamy czy ustawiony jest poprawny scope
 Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostępnych subskrypcji
+
 ![Screen](./img/20220413145621.jpg "Screen")
 
 #### 4.3 Przykładowe zapytania o zasoby
@@ -121,7 +122,7 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
   AzureActivity
   | order by TimeGenerated desc 
   ```
-  ![Screen](./img/20220413153252.jpg "Screen")
+  ![Screen](./img/20220413232419.jpg "Screen")
 
 
 
@@ -139,7 +140,6 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 az group delete --name $DIAGNOSTIC_RG --location $LOCATION --subscription $SUB_02
 az group delete --name $LOGSTEST01_RG --location $LOCATION --subscription $SUB_01
 az group delete --name $LOGSTEST02_RG --location $LOCATION --subscription $SUB_02
-
 ```
 
 
