@@ -110,7 +110,7 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 ### 5. Wykorzystanie `Log Analytics`
 `Resource Graph` nie posiada informacji o autorze zmian, informacje te natomiast można pobrać z `Activity log`, które exportujemy do `Log Analytics` w celu łatwiejszego odpytywania.
 
-#### 5.1 Przechodzimy do zasobu `diagnosticlogs-la` i z sekcji `General` Wybieramy `Logs`
+#### 5.1 Przechodzimy do zasobu `diagnosticlogs-la` i w sekcji `General` Wybieramy `Logs`
 ![Screen](./img/20220413152820.jpg "Screen")
 
 #### 5.2 Przykładowe zapytanie
