@@ -32,7 +32,7 @@ Dokumentacja:
 #### 2.3 Zaznaczamy logi administracyjne oraz Log Analytics workspace i zapisujemy ustawienia
 * [Kategorie logów - opis](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log-schema?WT.mc_id=Portal-Microsoft_Azure_Monitoring#categories)
 
-![Screen](./img/20220413143130.jpg "Screen")
+![Screen](./img/20220413221023.jpg "Screen")
 
 #### 2.4 Powyższe kroki powtarzamy dla każdej subskrypcji
 
@@ -77,7 +77,7 @@ Dokumentacja:
 * [Quickstart: Run your first Resource Graph query using REST API](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-rest-api)
 
 #### 4.1 Przechodzimy do usługi `Resource Graph Explorer`
-![Screen](./img/20220413144945.jpg "Screen")
+![Screen](./img/20220413221329.jpg "Screen")
 
 #### 4.2 Sprawdzamy czy ustawiony jest poprawny scope
 Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostępnych subskrypcji
@@ -112,7 +112,7 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 
 
 #### 5.1 Przechodzimy do zasobu `lab-diagnosticlogs-la` i w sekcji `General` Wybieramy `Logs`
-![Screen](./img/20220413152820.jpg "Screen")
+![Screen](./img/20220413221650.jpg "Screen")
 
 
 #### 5.2 Przykładowe zapytanie
