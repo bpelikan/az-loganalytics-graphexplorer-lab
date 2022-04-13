@@ -94,8 +94,8 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 * Lista ostatnich 10 zmian adresów IP na zasobie `Public IP address`:
   ```kql
   resourcechanges
-  | where properties.targetResourceId contains 'publicIPAddresses' and 
-  isnotempty(properties.changes["properties.ipAddress"].newValue) or isnotempty(properties.changes["properties.ipAddress"].previousValue)
+  | where properties.targetResourceId contains 'publicIPAddresses'
+  | where isnotempty(properties.changes["properties.ipAddress"].newValue) or isnotempty(properties.changes["properties.ipAddress"].previousValue)
   | extend changeTime=todatetime(properties.changeAttributes.timestamp) 
   | order by changeTime desc 
   | project properties.changeAttributes.timestamp, properties.changeAttributes.correlationId, properties.changeType, 
@@ -104,7 +104,7 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
   properties.targetResourceId, properties.targetResourceType, properties.changes 
   | limit 10
   ```
-  ![Screen](./img/20220413151342.jpg "Screen")
+  ![Screen](./img/20220413154242.jpg "Screen")
 
 
 ### 5. Wykorzystanie `Log Analytics`
