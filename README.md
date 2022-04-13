@@ -18,15 +18,19 @@ az monitor log-analytics workspace create --resource-group $DIAGNOSTIC_RG --work
 ```
 
 ## 2. Wysyłanie logów z Activity log do Log Analytics
-* https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log#send-to-log-analytics-workspace
+Dokumentacja:
+* [Send to Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log#send-to-log-analytics-workspace)
 
-### 2.1 
-![Screen](./img/Animation2.gif "Screen")
-
-
-
+### 2.1 Przechodzimy do `Activity log` -> `Export Activity Logs`
+![Screen](./img/20220413142425.jpg "Screen")
 
 
+### 2.2 Wybieramy subskrypcję i przechodzimy do `Add diagnostic setting`
+![Screen](./img/20220413142731.jpg "Screen")
+
+
+### 2.3 
+![Screen](./img/20220413143130.jpg "Screen")
 
 
 
@@ -35,6 +39,13 @@ az monitor log-analytics workspace create --resource-group $DIAGNOSTIC_RG --work
 
 
 
+<!-- ![Screen](./img/Animation2.gif "Screen")
+
+<details>
+  <summary><b><i>Utworzone środowisko</i></b></summary>
+
+![Screen](./img/20210109160110.jpg "Screen")
+</details>
 
 ```bash
 az group delete --name $DIAGNOSTIC_RG --location $LOCATION --subscription $SUB_02
@@ -55,4 +66,4 @@ az network public-ip create \
 
 az storage blob list --account-name "diagnosticdemobp" --container-name "insights-activity-logs"
 az storage blob list --account-name "diagnosticdemobpallsa" --container-name "insights-activity-logs"
-```
+``` -->
