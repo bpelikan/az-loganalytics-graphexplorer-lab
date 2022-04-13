@@ -1,7 +1,7 @@
-# az-activity-log-and-graph
+# az-activity-log-and-graph-lab
 
 
-## 1. Przygotowanie środowiska
+### 1. Przygotowanie środowiska
 ```bash
 SUB_01="616bb79e-73be-40ca-bea5-219c413d4771"
 SUB_02="748173f1-20c4-4e68-ac58-641f67a83501"
@@ -29,17 +29,60 @@ Dokumentacja:
 ![Screen](./img/20220413142731.jpg "Screen")
 
 
-#### 2.3 
+#### 2.3 Zaznaczamy logi administracyjne oraz Log Analytics workspace i zapisujemy ustawienia
+* [Kategorie logów - opis](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log-schema?WT.mc_id=Portal-Microsoft_Azure_Monitoring#categories)
+
 ![Screen](./img/20220413143130.jpg "Screen")
 
+#### 2.4 Powyższe kroki powtarzamy dla każdej subskrypcji
 
 
+### 3. Wygenerowanie przykładowych logów
+```bash
+# Utworzenie publicznych IP
+az network public-ip create \
+    --resource-group $LOGSTEST01_RG \
+    --subscription $SUB_01 \
+    --name sub01-pip \
+    --version IPv4 \
+    --sku Basic \
+    --allocation-method Static
+
+az network public-ip create \
+    --resource-group $LOGSTEST02_RG \
+    --subscription $SUB_02 \
+    --name sub02-pip \
+    --version IPv4 \
+    --sku Basic \
+    --allocation-method Dynamic
+
+# Wygenerowanie zmian na IP
+az network public-ip update \
+    --resource-group $LOGSTEST02_RG \
+    --subscription $SUB_02 \
+    --name sub02-pip \
+    --allocation-method Static
+
+az network public-ip update \
+    --resource-group $LOGSTEST02_RG \
+    --subscription $SUB_02 \
+    --name sub02-pip \
+    --allocation-method Dynamic
+```
+
+### 4. Wykorzystanie `Resource Graph`
+
+#### 4.1 Przechodzimy do usługi `Resource Graph Explorer`
+![Screen](./img/20220413144945.jpg "Screen")
+
+#### 4.2 Sprawdzamy czy ustawiony jest poprawny scope
+![Screen](./img/20220413145621.jpg "Screen")
+
+#### 4.3 
 
 
-
-
-
-<!-- ![Screen](./img/Animation2.gif "Screen")
+<!-- 
+![Screen](./img/Animation2.jpg "Screen")
 
 <details>
   <summary><b><i>Utworzone środowisko</i></b></summary>
