@@ -72,13 +72,37 @@ az network public-ip update \
 
 ### 4. Wykorzystanie `Resource Graph`
 
+Dokumentacja:
+* 
+
 #### 4.1 Przechodzimy do usługi `Resource Graph Explorer`
 ![Screen](./img/20220413144945.jpg "Screen")
 
 #### 4.2 Sprawdzamy czy ustawiony jest poprawny scope
 ![Screen](./img/20220413145621.jpg "Screen")
 
-#### 4.3 
+#### 4.3 Przykładowe zapytania o zasoby
+* Lista zasobow `Public IP address`, które mają dostępny adres publiczny
+  ```kql
+  Resources
+  | where type contains 'publicIPAddresses' and isnotempty(properties.ipAddress)
+  | project name,id= split(properties.ipConfiguration.id,"providers",1),ip_address=properties.ipAddress
+  ```
+  ![Screen](./img/20220413150111.jpg "Screen")
+* Lista ostatnich 10 zmian adresów IP na zasobie `Public IP address`
+  ```kql
+  resourcechanges
+  | where properties.targetResourceId contains 'publicIPAddresses' and 
+  isnotempty(properties.changes["properties.ipAddress"].newValue) or isnotempty(properties.changes["properties.ipAddress"].previousValue)
+  | extend changeTime=todatetime(properties.changeAttributes.timestamp) 
+  | order by changeTime desc 
+  | project properties.changeAttributes.timestamp, properties.changeAttributes.correlationId, properties.changeType, 
+  properties.changes["properties.ipAddress"].newValue, 
+  properties.changes["properties.ipAddress"].previousValue, 
+  properties.targetResourceId, properties.targetResourceType, properties.changes 
+  | limit 10
+  ```
+  ![Screen](./img/20220413151342.jpg "Screen")
 
 
 <!-- 
