@@ -199,9 +199,3 @@ az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
 
 ![Screen](./img/20210109160110.jpg "Screen")
 </details>
-
-```bash
-
-az storage blob list --account-name "diagnosticdemobp" --container-name "insights-activity-logs"
-az storage blob list --account-name "diagnosticdemobpallsa" --container-name "insights-activity-logs"
-``` -->
