@@ -125,6 +125,72 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
   ![Screen](./img/20220413232419.jpg "Screen")
 
 
+### 6. Połączenie danych za pomocą `Azure Workbooks`
+
+<!-- <details>
+  <summary><b><i>Utworzone środowisko</i></b></summary> -->
+
+#### 6.1 Przechodzimy do usługi `Monitor`
+![Screen](./img/20220414115622.jpg "Screen")
+
+#### 6.2 Następnie `Workbooks` -> `New` i tworzymy nowy  workbook
+![Screen](./img/20220414115705.jpg "Screen")
+
+#### 6.3 Zapytanie do `Log Analytics`
+Dodajemy nowe zapytanie:
+
+![Screen](./img/20220414115920.jpg "Screen")
+
+Wybieramy nasz `Log Analytics`, przedział czasowy i wklejamy poniższe zapytanie:
+```kql
+AzureActivity
+| where ActivityStatusValue == "Success"
+| order by TimeGenerated desc 
+| distinct CorrelationId, Caller
+```
+
+![Screen](./img/20220414120818.jpg "Screen")
+
+Przechodzimy do zakładki `Advanced Settings` i uzupełniamy `Step name`:
+
+![Screen](./img/20220414120959.jpg "Screen")
+
+#### 6.4 Zapytanie do `Resource Graph`:
+Dodajemy nowe zapytanie, tym razem jako `Data source` wybieramy `Azure Resource Graph` i ustawiamy nazwę zapytania w `Advanced Settings` -> `Step name`:
+```kql
+resourcechanges 
+| where isnotempty(properties.changes["properties.ipAddress"].newValue) or isnotempty(properties.changes["properties.ipAddress"].previousValue)
+| extend changeTime=todatetime(properties.changeAttributes.timestamp) 
+| order by changeTime desc 
+| project properties.changeAttributes.timestamp, properties.changeAttributes.correlationId, properties.changeType, 
+newIP=properties.changes["properties.ipAddress"].newValue, 
+oldIP=properties.changes["properties.ipAddress"].previousValue
+```
+![Screen](./img/20220414122908.jpg "Screen")
+
+#### 6.5 Połączenie danych
+Dodajemy nowe zapytanie, jako `Data source` wybieramy `Merge`, następnie wybieramy `Add Merge`:
+
+![Screen](./img/20220414122623.jpg "Screen")
+
+Otrzymane dane:
+![Screen](./img/20220414123103.jpg "Screen")
+
+<!-- </details> -->
+
+
+### 7. Usunięcie zasobów
+```bash
+az group delete --name $DIAGNOSTIC_RG --subscription $SUB_02 --yes --no-wait
+az group delete --name $LOGSTEST01_RG --subscription $SUB_01 --yes --no-wait
+az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
+```
+
+## Linki
+* [Send to Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log#send-to-log-analytics-workspace)
+* [Kategorie logów - opis](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log-schema?WT.mc_id=Portal-Microsoft_Azure_Monitoring#categories)
+* [What is Azure Resource Graph?](https://docs.microsoft.com/en-us/azure/governance/resource-graph/overview)
+* [Quickstart: Run your first Resource Graph query using REST API](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-rest-api)
 
 
 <!-- 
@@ -137,11 +203,12 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 </details>
 
 ```bash
-az group delete --name $DIAGNOSTIC_RG --location $LOCATION --subscription $SUB_02
-az group delete --name $LOGSTEST01_RG --location $LOCATION --subscription $SUB_01
-az group delete --name $LOGSTEST02_RG --location $LOCATION --subscription $SUB_02
+az group delete --name $DIAGNOSTIC_RG --subscription $SUB_02 --yes --no-wait
+az group delete --name $LOGSTEST01_RG --subscription $SUB_01 --yes --no-wait
+az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
 ```
 
+az group delete --name test --subscription $SUB_02 --yes --no-wait
 
 ```bash
 
