@@ -127,8 +127,8 @@ Wybor `Scope` jako `Directory` pozwoli odpytywać o zasoby ze wszystkich dostęp
 
 ### 6. Połączenie danych za pomocą `Azure Workbooks`
 
-<!-- <details>
-  <summary><b><i>Utworzone środowisko</i></b></summary> -->
+
+* [Łączenie danych w Azure Monitor workbooks](https://github.com/microsoft/Application-Insights-Workbooks/blob/1ddc38529f498c209fb3fe21795f607d4cd232b7/Documentation/DataSources/DataSources.md#merge-data-from-different-sources)
 
 #### 6.1 Przechodzimy do usługi `Monitor`
 ![Screen](./img/20220414115622.jpg "Screen")
@@ -176,8 +176,6 @@ Dodajemy nowe zapytanie, jako `Data source` wybieramy `Merge`, następnie wybier
 Otrzymane dane:
 ![Screen](./img/20220414123103.jpg "Screen")
 
-<!-- </details> -->
-
 
 ### 7. Usunięcie zasobów
 ```bash
@@ -191,11 +189,11 @@ az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
 * [Kategorie logów - opis](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log-schema?WT.mc_id=Portal-Microsoft_Azure_Monitoring#categories)
 * [What is Azure Resource Graph?](https://docs.microsoft.com/en-us/azure/governance/resource-graph/overview)
 * [Quickstart: Run your first Resource Graph query using REST API](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-rest-api)
+* [Łączenie danych w Azure Monitor workbooks](https://github.com/microsoft/Application-Insights-Workbooks/blob/1ddc38529f498c209fb3fe21795f607d4cd232b7/Documentation/DataSources/DataSources.md#merge-data-from-different-sources)
+
 
 
 <!-- 
-![Screen](./img/Animation2.jpg "Screen")
-
 <details>
   <summary><b><i>Utworzone środowisko</i></b></summary>
 
@@ -203,21 +201,6 @@ az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
 </details>
 
 ```bash
-az group delete --name $DIAGNOSTIC_RG --subscription $SUB_02 --yes --no-wait
-az group delete --name $LOGSTEST01_RG --subscription $SUB_01 --yes --no-wait
-az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
-```
-
-az group delete --name test --subscription $SUB_02 --yes --no-wait
-
-```bash
-
-az network public-ip create \
-    --resource-group $RGROUP \
-    --name test-pip \
-    --version IPv4 \
-    --sku Basic \
-    --allocation-method Dynamic
 
 az storage blob list --account-name "diagnosticdemobp" --container-name "insights-activity-logs"
 az storage blob list --account-name "diagnosticdemobpallsa" --container-name "insights-activity-logs"
