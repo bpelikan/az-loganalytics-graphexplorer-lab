@@ -194,7 +194,7 @@ Usunąć należy również plan skonfigurowany w [pkt. 2](#2-wysyłanie-logów-z
 * [What is Azure Resource Graph?](https://docs.microsoft.com/en-us/azure/governance/resource-graph/overview)
 * [Quickstart: Run your first Resource Graph query using REST API](https://docs.microsoft.com/en-us/azure/governance/resource-graph/first-query-rest-api)
 * [Łączenie danych w Azure Monitor workbooks](https://github.com/microsoft/Application-Insights-Workbooks/blob/1ddc38529f498c209fb3fe21795f607d4cd232b7/Documentation/DataSources/DataSources.md#merge-data-from-different-sources)
-
+* [How to call Azure REST APIs with Postman](https://docs.microsoft.com/en-us/rest/api/azure/#how-to-call-azure-rest-apis-with-postman)
 
 
 <!-- 
