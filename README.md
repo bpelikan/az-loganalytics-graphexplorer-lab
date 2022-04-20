@@ -144,12 +144,12 @@ Dodajemy nowe zapytanie:
 Wybieramy nasz `Log Analytics`, przedział czasowy i wklejamy poniższe zapytanie:
 ```kql
 AzureActivity
-| where ActivityStatusValue == "Success"
+| where ActivityStatusValue =~ "Success"
 | order by TimeGenerated desc 
 | distinct CorrelationId, Caller
 ```
 
-![Screen](./img/20220414120818.jpg "Screen")
+![Screen](./img/20220414151502.jpg "Screen")
 
 Przechodzimy do zakładki `Advanced Settings` i uzupełniamy `Step name`:
 
@@ -183,6 +183,10 @@ az group delete --name $DIAGNOSTIC_RG --subscription $SUB_02 --yes --no-wait
 az group delete --name $LOGSTEST01_RG --subscription $SUB_01 --yes --no-wait
 az group delete --name $LOGSTEST02_RG --subscription $SUB_02 --yes --no-wait
 ```
+
+Usunąć należy również plan skonfigurowany w [pkt. 2](#2-wysyłanie-logów-z-activity-log-do-log-analytics).
+
+
 
 ## Linki
 * [Send to Log Analytics workspace](https://docs.microsoft.com/en-us/azure/azure-monitor/essentials/activity-log#send-to-log-analytics-workspace)
