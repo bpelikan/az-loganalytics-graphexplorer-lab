@@ -23,6 +23,11 @@ resourcechanges
 | extend changeTime=format_datetime(todatetime(properties.changeAttributes.timestamp), 'yy-MM-dd HH:mm')
 | summarize changes_count=count() by tostring(changeTime)
 | order by changes_count
+
+resourcechanges 
+| extend changeTime=todatetime(properties.changeAttributes.timestamp)
+| summarize event_count = count() by bin(changeTime, 1m)
+| order by event_count
 ```
 
 <details>
@@ -48,6 +53,8 @@ Resources
 #### 4. Lista adresów IP używanych przez VM
 * [Azure Resource Graph query to find all VMs with public IPs](https://stackoverflow.com/questions/56758465/azure-resource-graph-query-to-find-all-vms-with-public-ips)
 * [Print all VM names and private IP from subnet](https://stackoverflow.com/questions/67674782/print-all-vm-names-and-private-ip-from-subnet)
+* [List virtual machines with their network interface and public IP](https://docs.microsoft.com/en-us/azure/governance/resource-graph/samples/advanced?tabs=azure-cli#join-vmpip)
+
 
 ```kql
 Resources
@@ -76,6 +83,40 @@ Resources
 </details>
 
 
+#### 5. Ilość zmian w ciągu dnia
+```kql
+resourcechanges 
+| extend hour = floor(todatetime(properties.changeAttributes.timestamp) % 1d , 1h)
+| summarize event_count=count() by hour
+| sort by hour asc
+//| render timechart
+//| render columnchart
+```
+
+<details>
+  <summary><b><i>Results</i></b></summary>
+
+![Screen](./img/20220510123612.jpg "Screen")
+</details>
+
+
+#### 6. VM private IP
+```kql
+Resources
+| where type =~ 'microsoft.compute/virtualmachines'
+| extend nics=array_length(properties.networkProfile.networkInterfaces)
+| mv-expand nic=properties.networkProfile.networkInterfaces
+| where nics == 1 or nic.properties.primary =~ 'true' or isempty(nic)
+| project vmId = id, vmName = name, vmSize=tostring(properties.hardwareProfile.vmSize), nicId = tostring(nic.id)
+| join kind=leftouter (
+    Resources
+    | where type =~ 'microsoft.network/networkinterfaces'
+    | extend ipConfigsCount=array_length(properties.ipConfigurations)
+    | mv-expand ipconfig=properties.ipConfigurations
+    | where ipConfigsCount == 1 or ipconfig.properties.primary =~ 'true'
+    | project nicId = id, privateIPAddress = tostring(ipconfig.properties.privateIPAddress))
+on nicId
+```
 
 
 <!-- ## Linki
